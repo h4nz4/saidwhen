@@ -4,10 +4,11 @@ Machine-checked rules: every document has frontmatter with `type`; every
 relative markdown link resolves; every Decision links to evidence and has a
 timestamp. Exits 0 on a conformant bundle, 1 otherwise.
 
-Usage: python validate.py <bundle-dir> [--check-specs <specs-dir>]
---check-specs additionally verifies every relative link in the given spec
-directory resolves (provenance why-links included) — plain markdown only,
-no OpenSpec CLI or grammar dependency.
+Usage: python validate.py <bundle-dir> [--check-specs <dir-or-file>]...
+--check-specs (repeatable: specs/docs dirs or single .md files) additionally
+verifies every relative link in the given documents resolves, and that no checked document
+cites a superseded Decision (docs rot) — plain markdown only, no OpenSpec CLI
+or grammar dependency. Supersession links inside the bundle itself are exempt.
 Stdlib only — vendor this single file if you want the check without the repo.
 """
 import argparse
@@ -49,22 +50,34 @@ def validate(bundle: Path) -> list[str]:
     return errors
 
 
-def check_specs(specs_dir: Path) -> list[str]:
+def check_specs(specs_path: Path) -> list[str]:
     errors = []
-    for doc in sorted(specs_dir.rglob("*.md")):
+    docs = [specs_path] if specs_path.is_file() else sorted(specs_path.rglob("*.md"))
+    for doc in docs:
         text = doc.read_text(encoding="utf-8-sig")
         for link in MD_LINK.findall(text):
             if link.startswith(("http://", "https://")):
                 continue
-            if not (doc.parent / link).resolve().exists():
+            target = (doc.parent / link).resolve()
+            if not target.exists():
                 errors.append(f"{doc.as_posix()}: broken link -> {link}")
+            elif target.suffix == ".md":
+                fm = FRONTMATTER.match(target.read_text(encoding="utf-8-sig"))
+                if fm and re.search(r"^type:\s*Decision\s*$", fm.group(1), re.M) \
+                      and re.search(r"^status:\s*superseded\s*$", fm.group(1), re.M):
+                    # ponytail: successor hint = first decisions/ link in the stale doc
+                    succ = [l for l in MD_LINK.findall(target.read_text(encoding="utf-8-sig"))
+                            if "decisions/" in l]
+                    hint = f" (successor: {succ[0]})" if succ else ""
+                    errors.append(f"{doc.as_posix()}: cites superseded decision -> {link}{hint}")
     return errors
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("bundle", nargs="?", default="knowledge", help="bundle directory (default: knowledge)")
-    parser.add_argument("--check-specs", metavar="DIR", help="also check relative links in a specs directory")
+    parser.add_argument("--check-specs", metavar="PATH", action="append",
+                        help="also check a specs/docs directory or single .md file: links must resolve and must not cite superseded decisions (repeatable)")
     parser.add_argument("--strict", action="store_true", help="reserved for future conformance levels")
     args = parser.parse_args(argv)
 
@@ -73,10 +86,10 @@ def main(argv=None) -> int:
         print(f"INVALID  {bundle} is not a directory")
         return 1
     errs = validate(bundle)
-    if args.check_specs:
-        specs = Path(args.check_specs)
-        if not specs.is_dir():
-            print(f"INVALID  {specs} is not a directory")
+    for d in args.check_specs or []:
+        specs = Path(d)
+        if not specs.exists():
+            print(f"INVALID  {specs} does not exist")
             return 1
         errs += check_specs(specs)
     for e in errs:

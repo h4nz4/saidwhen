@@ -1,4 +1,12 @@
+<p align="center"><img src="assets/logo.png" width="180" alt="saidwhen logo"></p>
+
 # saidwhen
+
+[![CI](https://github.com/h4nz4/saidwhen/actions/workflows/ci.yml/badge.svg)](https://github.com/h4nz4/saidwhen/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](validator/validate.py)
+[![Dependencies: none](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](validator/validate.py)
+[![Format: OKF](https://img.shields.io/badge/format-OKF-orange.svg)](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
 
 > Your AI already interviewed you. Stop letting it forget the answers.
 
@@ -41,6 +49,18 @@ Full write-up: [evidence/VALIDATION.md](evidence/VALIDATION.md). Honest
 limitations included (single model family, demo-sized wikis, unblinded
 scoring with published raw outputs).
 
+### And this repo runs on it
+
+[knowledge/](knowledge/) is saidwhen's own live bundle, not a demo. Why is
+the product skills-first? [The decision](knowledge/decisions/skills-first-distribution.md)
+answers, linked to the [interview](knowledge/interviews/2026-07-08-distribution-strategy.md)
+that justified it — the same chain the diagram above promises you. CI
+validates the bundle, and checks this README against it for broken links
+*and* citations of superseded decisions, on every push. saidwhen itself is
+developed with [OpenSpec](https://github.com/Fission-AI/OpenSpec) through
+the `wiki-opsx-*` adapters we ship: the integration you get is the one we
+use daily.
+
 ## Quickstart (5 minutes)
 
 1. Install the skills: copy directories from [skills/](skills/) into your
@@ -56,8 +76,23 @@ scoring with published raw outputs).
 
 Optional: vendor [validator/validate.py](validator/validate.py) (one stdlib
 file) and run `python validate.py knowledge` in CI — the wiki-capture skill
-also bundles it. OpenSpec user? Install the `wiki-opsx-*` skills — explore
-consults the wiki first, archive harvests decisions into it.
+also bundles it. [OpenSpec](https://github.com/Fission-AI/OpenSpec) user?
+Install the `wiki-opsx-*` skills — explore consults the wiki first, archive
+harvests decisions into it.
+
+## Docs that don't rot
+
+Any in-repo markdown — architecture notes, `docs/`, even your `AGENTS.md` —
+can carry the same why-links as specs — like this real one:
+([why](example/knowledge/decisions/magic-link-auth.md)). Then
+
+```
+python validator/validate.py knowledge --check-specs docs --check-specs openspec/specs
+```
+
+fails CI when a link breaks **or when a cited decision has been superseded**:
+the doc leaning on a stale why gets flagged, with its successor named. Docs
+stop silently outliving the decisions under them.
 
 ## What's in the box
 
@@ -65,7 +100,7 @@ consults the wiki first, archive harvests decisions into it.
 |---|---|---|
 | **L1 Convention** | Bundle layout, concept types, linking rules, decision lifecycle. One page, versioned. | [CONVENTION.md](CONVENTION.md) |
 | **L2 Behaviors** | Tool-agnostic prompts: [read-first](behaviors/read-first.md), [capture](behaviors/capture.md), [gc](behaviors/gc.md). The validated wording. | [behaviors/](behaviors/) |
-| **L3 Skills** | Drop-in [Agent Skills](https://agentskills.io/home) (open standard, any supporting agent): init, explore, capture, gc, OpenSpec pack. The ambient [AGENTS.md snippet](skills/wiki-init/assets/snippet.md) ships inside wiki-init as the fallback. | [skills/](skills/) |
+| **L3 Skills** | Drop-in [Agent Skills](https://agentskills.io/home) (open standard, any supporting agent): init, explore, capture, gc, [OpenSpec](https://github.com/Fission-AI/OpenSpec) pack. The ambient [AGENTS.md snippet](skills/wiki-init/assets/snippet.md) ships inside wiki-init as the fallback. | [skills/](skills/) |
 | Demo | TaskLite — browse a working provenance chain on GitHub. | [example/](example/) |
 | Validator | Frontmatter, links, decision-evidence rule. Stdlib, one file. | [validator/](validator/) |
 | Proof | Protocols, 54 raw transcripts, scoring, statistics. | [evidence/](evidence/) |

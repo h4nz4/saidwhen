@@ -94,6 +94,57 @@ class ValidateTests(unittest.TestCase):
                 encoding="utf-8")
             self.assertEqual(main([str(self.bundle), "--check-specs", specs]), 0)
 
+    def test_check_specs_superseded_citation_fails(self):
+        self.write("decisions/new.md", GOOD_DECISION)
+        self.write("decisions/old.md", GOOD_DECISION.replace(
+            "status: accepted", "status: superseded").replace(
+            "Evidence:", "Superseded by [new](../decisions/new.md). Evidence:"))
+        self.write("interviews/talk.md", INTERVIEW)
+        with tempfile.TemporaryDirectory() as docs:
+            (Path(docs) / "arch.md").write_text(
+                f"We use X ([why]({(self.bundle / 'decisions' / 'old.md').as_posix()}))",
+                encoding="utf-8")
+            self.assertEqual(main([str(self.bundle), "--check-specs", docs]), 1)
+
+    def test_bundle_internal_supersession_chain_passes(self):
+        self.write("decisions/new.md", GOOD_DECISION)
+        self.write("decisions/old.md", GOOD_DECISION.replace(
+            "status: accepted", "status: superseded").replace(
+            "Evidence:", "Superseded by [new](../decisions/new.md). Evidence:"))
+        self.write("interviews/talk.md", INTERVIEW)
+        with tempfile.TemporaryDirectory() as docs:
+            (Path(docs) / "arch.md").write_text(
+                f"We use X ([why]({(self.bundle / 'decisions' / 'new.md').as_posix()}))",
+                encoding="utf-8")
+            self.assertEqual(main([str(self.bundle), "--check-specs", docs]), 0)
+
+    def test_check_specs_accepts_single_file(self):
+        self.write("decisions/new.md", GOOD_DECISION)
+        self.write("decisions/old.md", GOOD_DECISION.replace(
+            "status: accepted", "status: superseded").replace(
+            "Evidence:", "Superseded by [new](../decisions/new.md). Evidence:"))
+        self.write("interviews/talk.md", INTERVIEW)
+        with tempfile.TemporaryDirectory() as docs:
+            bad = Path(docs) / "readme.md"
+            bad.write_text(
+                f"[gone](nope.md) and X ([why]({(self.bundle / 'decisions' / 'old.md').as_posix()}))",
+                encoding="utf-8")
+            self.assertEqual(main([str(self.bundle), "--check-specs", str(bad)]), 1)
+            good = Path(docs) / "clean.md"
+            good.write_text(
+                f"X ([why]({(self.bundle / 'decisions' / 'new.md').as_posix()}))",
+                encoding="utf-8")
+            self.assertEqual(main([str(self.bundle), "--check-specs", str(good)]), 0)
+
+    def test_check_specs_repeatable(self):
+        self.write("decisions/d.md", GOOD_DECISION)
+        self.write("interviews/talk.md", INTERVIEW)
+        with tempfile.TemporaryDirectory() as ok_dir, tempfile.TemporaryDirectory() as bad_dir:
+            (Path(ok_dir) / "fine.md").write_text("no links here", encoding="utf-8")
+            (Path(bad_dir) / "broken.md").write_text("[gone](nope.md)", encoding="utf-8")
+            self.assertEqual(
+                main([str(self.bundle), "--check-specs", ok_dir, "--check-specs", bad_dir]), 1)
+
     def test_exit_codes(self):
         self.write("decisions/d.md", GOOD_DECISION)
         self.write("interviews/talk.md", INTERVIEW)

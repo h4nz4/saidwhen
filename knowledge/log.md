@@ -11,3 +11,6 @@ title: Change history
 2026-07-08  decisions/validation-gates-skills-first.md      updated  gate passed 36/36 — restructure cleared to ship
 2026-07-08  interviews/2026-07-08-slim-to-skills.md         created  follow-up: skills/ is the whole product surface
 2026-07-08  decisions/skills-first-distribution.md          updated  amended — snippet canonical moves into wiki-init, adapters/ removed
+2026-07-08  interviews/2026-07-08-docs-provenance.md      created  docs provenance scoping session with Ivan
+2026-07-08  interviews/2026-07-08-dogfooding-visibility.md  created  dogfooding visibility session with Ivan
+2026-07-08  decisions/dogfooding-surfaced-not-published.md  created  README surfaces dogfooding; openspec/ workspace stays untracked

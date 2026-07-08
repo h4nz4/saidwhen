@@ -39,3 +39,7 @@ to run without this repo.
   it carries the identical validated wording.
 - Skills work without this repo present; the `behaviors/` references inside
   them name the normative source, not a runtime dependency.
+- Your project docs (including AGENTS.md/CLAUDE.md) can carry
+  `([why](...))` links into `knowledge/` too — the bundled validator's
+  `--check-specs <dir>` flags broken links *and* citations of superseded
+  decisions, so docs rot becomes a CI failure instead of a surprise.

@@ -23,5 +23,5 @@ jobs:
       - name: Validate evidence fixture bundles
         run: |
           python validator/validate.py evidence/example-stale/knowledge
-      - name: Link-check public documents
-        run: python validator/check_links.py README.md CONVENTION.md CONTRIBUTING.md evidence/VALIDATION.md
+      - name: Provenance-check public documents (links + superseded citations)
+        run: python validator/validate.py knowledge --check-specs README.md --check-specs CONVENTION.md --check-specs CONTRIBUTING.md --check-specs evidence/VALIDATION.md

@@ -14,6 +14,7 @@ Decision provenance for the saidwhen project itself. The demo bundle lives in
 
 - [Skills-first distribution](decisions/skills-first-distribution.md) — accepted 2026-07-08
 - [Validation gates the skills-first restructure](decisions/validation-gates-skills-first.md) — accepted 2026-07-08
+- [Dogfooding surfaced in README, workspace stays private](decisions/dogfooding-surfaced-not-published.md) — accepted 2026-07-08
 
 ## Constraints
 
@@ -23,6 +24,7 @@ Decision provenance for the saidwhen project itself. The demo bundle lives in
 
 - [2026-07-08 — distribution strategy with Ivan](interviews/2026-07-08-distribution-strategy.md)
 - [2026-07-08 — round-4 protocol sign-off with Ivan](interviews/2026-07-08-round4-signoff.md)
+- [2026-07-08 — dogfooding visibility with Ivan](interviews/2026-07-08-dogfooding-visibility.md)
 
 ## History
 

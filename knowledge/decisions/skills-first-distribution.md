@@ -24,6 +24,13 @@ stance, and (b) the fallback for agents without skills support. The
 Shipping is gated by
 [validation-gates-skills-first](validation-gates-skills-first.md).
 
+**Amended 2026-07-08** (evidence:
+[slim-to-skills interview](../interviews/2026-07-08-slim-to-skills.md)):
+the snippet's canonical home is `skills/wiki-init/assets/snippet.md` — there
+is no standalone `adapters/` directory. `skills/` is the entire product
+surface; `behaviors/` remains only as the normative wording anchor for the
+CI sync guard.
+
 ## Evidence
 
 - [Interview 2026-07-08 with Ivan](../interviews/2026-07-08-distribution-strategy.md):

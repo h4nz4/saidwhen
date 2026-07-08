@@ -6,6 +6,7 @@
 This project keeps its decision provenance in an OKF bundle at `knowledge/`.
 Follow these rules.
 
+<!-- saidwhen:behavior read-first v0.1 -->
 ## Before planning or asking anything
 
 1. Read `knowledge/index.md`. Follow links relevant to your current task
@@ -21,10 +22,15 @@ Follow these rules.
      **delta question**: "this was decided on <date> because <evidence>;
      is that still true?"
 
-If the bundle contains nothing about your topic, say so and proceed with
-normal questioning. Never cite a decision, interview, or constraint that does
-not exist.
+## When the wiki is silent
 
+If the bundle contains nothing about your topic, say so and proceed with
+normal questioning. **Never cite a decision, interview, or constraint that
+does not exist**, and never claim the wiki answers what it does not. Recorded
+constraints that genuinely apply to the new topic still apply.
+<!-- /saidwhen:behavior read-first -->
+
+<!-- saidwhen:behavior capture v0.1 -->
 ## When a decision crystallizes
 
 1. Write `knowledge/decisions/<slug>.md` with `type: Decision`,
@@ -37,5 +43,14 @@ not exist.
    `YYYY-MM-DD  <path>  <created|updated|superseded>  <one-line reason>`.
 4. Add the new concept to `knowledge/index.md` if it's load-bearing.
 
-Never delete or silently contradict a recorded decision — supersede it
-(`status: superseded`, link to successor, log it).
+## When superseding a decision
+
+Never delete or silently contradict a recorded decision. Set the old
+document's `status: superseded`, link it to its successor, record the new
+evidence, and log the supersession.
+
+## When work completes
+
+Distill: which decisions from this session deserve to outlive it? Capture
+those; let the rest evaporate. The wiki is a curated library, not a transcript.
+<!-- /saidwhen:behavior capture -->

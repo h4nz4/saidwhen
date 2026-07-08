@@ -3,6 +3,7 @@
 Wikis rot. Run this pass periodically (or when the bundle feels stale) to
 keep `knowledge/` a curated library instead of a graveyard.
 
+<!-- saidwhen:behavior gc v0.1 -->
 ## The pass
 
 1. **Merge duplicates.** Two documents describing the same fact become one;
@@ -25,3 +26,4 @@ keep `knowledge/` a curated library instead of a graveyard.
 - Every change made by this pass appends a line to `knowledge/log.md`.
 - This pass never deletes a Decision — supersession preserves history.
 - Run the validator after the pass; the bundle must still conform.
+<!-- /saidwhen:behavior gc -->

@@ -3,6 +3,7 @@
 You are working in a project that keeps its decision provenance in an OKF
 bundle at `knowledge/`. When knowledge crystallizes, record it.
 
+<!-- saidwhen:behavior capture v0.1 -->
 ## When a decision crystallizes
 
 1. Write `knowledge/decisions/<slug>.md` with `type: Decision`,
@@ -25,3 +26,4 @@ evidence, and log the supersession.
 
 Distill: which decisions from this session deserve to outlive it? Capture
 those; let the rest evaporate. The wiki is a curated library, not a transcript.
+<!-- /saidwhen:behavior capture -->

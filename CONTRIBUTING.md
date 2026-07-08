@@ -28,13 +28,28 @@ wait for v1.0 and need a migration note.
 Changes to machine-checked conformance rules must land together with the
 matching [validator](validator/) change and tests.
 
-## Adding an adapter
+## Adding a skill (or adapter)
 
-Adapters live in `adapters/<tool>/` and contain **only tool-specific
-binding** — frontmatter, triggers, lifecycle hooks, install steps. The
-normative wording lives in [behaviors/](behaviors/) alone; adapters point at
-it or embed it verbatim with a "edit there, not here" header. Include a
-README with install steps (aim for 3) and the sync rule.
+Skills live in `skills/<name>/` and must be **self-contained drop-ins**: a
+SKILL.md whose behavior rules are embedded verbatim between
+`<!-- saidwhen:behavior <name> ... -->` markers, plus any bundled assets
+(the wiki-capture skill carries the validator as `scripts/validate.py`).
+The normative wording lives in [behaviors/](behaviors/) alone — the embed is
+a copy, and CI enforces it: `python validator/check_sync.py` fails on any
+divergence between an embedded block and its behavior file, or between a
+bundled file copy and its canonical source. Add new skills to the table in
+[skills/README.md](skills/README.md).
+
+Two guardrails beyond wording sync:
+
+- **New delivery mechanisms need validation.** Skill-delivered read-first
+  is validated ([round 4](evidence/experiment/round4-skill-trigger/results.md));
+  a new mechanism (hook, MCP, another trigger model) can't claim parity in
+  the README until it passes an equivalent pre-registered round.
+- The AGENTS.md snippet lives at its single canonical home,
+  `skills/wiki-init/assets/snippet.md` — the ambient fallback and the
+  wiki-init payload. It carries the same marked regions and the same sync
+  guard applies.
 
 ## Everything else
 
@@ -42,5 +57,7 @@ README with install steps (aim for 3) and the sync rule.
   only, never content edits.
 - Validator stays single-file and stdlib-only; that constraint is the
   product.
-- Run before pushing: `python -m unittest` in `validator/`, then
-  `python validator/validate.py example/knowledge` from the repo root.
+- Run before pushing, from the repo root: `python -m unittest discover -s
+  validator`, `python validator/validate.py example/knowledge --check-specs
+  example/openspec/specs`, `python validator/validate.py knowledge`, and
+  `python validator/check_sync.py`.

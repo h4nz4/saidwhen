@@ -75,6 +75,25 @@ class ValidateTests(unittest.TestCase):
         self.write("interviews/talk.md", INTERVIEW, encoding="utf-8-sig")
         self.assertEqual(validate(self.bundle), [])
 
+    def test_check_specs_broken_why_link_fails(self):
+        self.write("decisions/d.md", GOOD_DECISION)
+        self.write("interviews/talk.md", INTERVIEW)
+        with tempfile.TemporaryDirectory() as specs:
+            (Path(specs) / "spec.md").write_text(
+                f"### Requirement: X\nMUST hold. ([why]({(self.bundle / 'decisions' / 'gone.md').as_posix()}))",
+                encoding="utf-8")
+            self.assertEqual(main([str(self.bundle), "--check-specs", specs]), 1)
+
+    def test_check_specs_resolving_why_link_passes(self):
+        self.write("decisions/d.md", GOOD_DECISION)
+        self.write("interviews/talk.md", INTERVIEW)
+        with tempfile.TemporaryDirectory() as specs:
+            (Path(specs) / "spec.md").write_text(
+                f"### Requirement: X\nMUST hold. ([why]({(self.bundle / 'decisions' / 'd.md').as_posix()})) "
+                "plus an [external](https://example.com) link",
+                encoding="utf-8")
+            self.assertEqual(main([str(self.bundle), "--check-specs", specs]), 0)
+
     def test_exit_codes(self):
         self.write("decisions/d.md", GOOD_DECISION)
         self.write("interviews/talk.md", INTERVIEW)

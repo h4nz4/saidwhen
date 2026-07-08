@@ -1,0 +1,49 @@
+---
+type: Decision
+title: Skills-first distribution
+description: saidwhen's primary deliverable is a top-level skills/ directory of self-contained, drop-in Agent Skills; the AGENTS.md snippet becomes a wiki-init payload and fallback.
+status: accepted
+timestamp: 2026-07-08T02:30:00Z
+tags: [distribution, adapters]
+---
+
+# Skills-first distribution
+
+The primary deliverable is `skills/` at the repo root: self-contained
+SKILL.md directories per the open
+[Agent Skills standard](https://agentskills.io/home), installable by copying
+into any supporting agent (Claude Code, Codex CLI, Gemini CLI, Cursor,
+Copilot, …). Each skill inlines its behavior wording (with `behaviors/` as
+the normative source, guarded in CI) and bundles what it needs to run
+standalone — e.g. the validator as `scripts/validate.py` in the capture
+skill. The AGENTS.md snippet is demoted from headline adapter to (a) the
+payload a `wiki-init` skill offers to install for the ambient read-first
+stance, and (b) the fallback for agents without skills support. The
+`adapters/claude-code` label disappears; the OpenSpec skills keep their shape.
+
+Shipping is gated by
+[validation-gates-skills-first](validation-gates-skills-first.md).
+
+## Evidence
+
+- [Interview 2026-07-08 with Ivan](../interviews/2026-07-08-distribution-strategy.md):
+  "the entire repo should be designed as skills, so that people can drop-in
+  install them", under the [no-vendor-lock-in](../constraints/no-vendor-lock-in.md)
+  constraint.
+- External: SKILL.md is the open Agent Skills standard (announced 2025-12-18,
+  spec at [agentskills.io](https://agentskills.io/home)) with 16+
+  implementations including
+  [Codex](https://developers.openai.com/codex/skills), Gemini CLI, Cursor,
+  and Copilot — so skill-shaped no longer implies Claude-only.
+
+## Rejected
+
+- **AGENTS.md-primary, skills demoted** ("keep, but demote" from round 1 of
+  the same interview) — rejected the same day: it rested on the premise that
+  SKILL.md was Claude-specific, which the Agent Skills standard falsifies.
+  Revisit if the standard fragments or major agents drop support.
+- **Coequal adapters** (skills and snippet as equal peers) — rejected: more
+  surface to keep in sync, weaker story, no single obvious install path.
+- **Everything ambient via AGENTS.md only** — rejected: moment-shaped
+  behaviors (capture, gc, archive-harvest) fit conditional skill loading;
+  forcing them into always-on context bloats every conversation.

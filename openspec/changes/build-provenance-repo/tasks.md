@@ -7,20 +7,20 @@
 
 ## 2. Convention v0.1
 
-- [ ] 2.1 Revise CONVENTION.md into the versioned v0.1 spec: add conformance criteria, decision lifecycle (`accepted`/`superseded`/`revisit`, supersession preserves history), and frontmatter field table
-- [ ] 2.2 Verify example/ bundle conforms to the final wording (run validator; supersession rule needs no fixture change but check log.md discipline)
+- [x] 2.1 Revise CONVENTION.md into the versioned v0.1 spec: add conformance criteria, decision lifecycle (`accepted`/`superseded`/`revisit`, supersession preserves history), and frontmatter field table
+- [x] 2.2 Verify example/ bundle conforms to the final wording (run validator; supersession rule needs no fixture change but check log.md discipline)
 
 ## 3. Behaviors
 
-- [ ] 3.1 Split behaviors/read-first.md into read-first.md (recall + staleness delta) and capture.md (decision/interview writing + log discipline), preserving validated wording verbatim
-- [ ] 3.2 Write behaviors/gc.md (merge duplicates, flag decisions past revisit triggers, repair links, log every change)
-- [ ] 3.3 Add the no-fabrication rule explicitly to read-first.md (currently implicit; wording addition only, additive per design D2)
+- [x] 3.1 Split behaviors/read-first.md into read-first.md (recall + staleness delta) and capture.md (decision/interview writing + log discipline), preserving validated wording verbatim
+- [x] 3.2 Write behaviors/gc.md (merge duplicates, flag decisions past revisit triggers, repair links, log every change)
+- [x] 3.3 Add the no-fabrication rule explicitly to read-first.md (currently implicit; wording addition only, additive per design D2)
 
 ## 4. Validator hardening
 
-- [ ] 4.1 Add argparse CLI (bundle dir arg, `--strict` reserved), keep single-file stdlib-only
-- [ ] 4.2 Write validator/test_validate.py: pass case, missing-type, broken-link, evidence-less-decision, BOM fixture — pytest-compatible, unittest-runnable
-- [ ] 4.3 Run tests on Windows and confirm exit codes
+- [x] 4.1 Add argparse CLI (bundle dir arg, `--strict` reserved), keep single-file stdlib-only
+- [x] 4.2 Write validator/test_validate.py: pass case, missing-type, broken-link, evidence-less-decision, BOM fixture — pytest-compatible, unittest-runnable
+- [x] 4.3 Run tests on Windows and confirm exit codes
 
 ## 5. Adapters
 

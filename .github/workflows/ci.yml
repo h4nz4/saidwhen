@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validator self-tests
+        run: python -m unittest discover -s validator -v
+      - name: Validate example bundle
+        run: python validator/validate.py example/knowledge
+      - name: Validate evidence fixture bundles
+        run: |
+          python validator/validate.py evidence/example-stale/knowledge
+      - name: Link-check public documents
+        run: python validator/check_links.py README.md CONVENTION.md CONTRIBUTING.md evidence/VALIDATION.md

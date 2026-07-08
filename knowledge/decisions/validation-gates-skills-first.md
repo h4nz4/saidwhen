@@ -19,10 +19,18 @@ validated delivery, the skills-first restructure of
 Every commit keeps the "measurably works" claim tied to what was actually
 tested.
 
+**Outcome (2026-07-08): the gate PASSED.** Round 4 scored 6/6 on both
+scenarios for the skill arm on Claude Code, 6/6 on both for the Codex CLI
+cohort, with the ambient control at 6/6 (validity check met) — 36/36 runs.
+See `evidence/experiment/round4-skill-trigger/results.md`. The skills-first
+restructure is cleared to ship, including the cross-agent parity claim.
+
 ## Evidence
 
 - [Interview 2026-07-08 with Ivan](../interviews/2026-07-08-distribution-strategy.md):
   chose "validate first" over shipping with a caveat.
+- [Interview 2026-07-08, round-4 sign-off](../interviews/2026-07-08-round4-signoff.md):
+  fixed the gate rule, probes, cohorts, and execution before registration.
 
 ## Rejected
 

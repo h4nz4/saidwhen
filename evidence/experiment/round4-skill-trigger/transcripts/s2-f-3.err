@@ -1,0 +1,13 @@
+Reading additional input from stdin...
+2026-07-08T01:32:36.872959Z ERROR codex_core::tools::router: error=Exit code: 1
+Wall time: 0.4 seconds
+Output:
+Get-Content : Cannot find path 'C:\Users\Ivan\.agents\skills\wiki-explore\SKILL.md' because it does not exist.
+At line:2 char:1
++ Get-Content -Raw C:\Users\Ivan\.agents\skills\wiki-explore\SKILL.md
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\Ivan\....xplore\SKILL.md:String) [Get-Content], ItemNotFoundEx 
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+ 
+

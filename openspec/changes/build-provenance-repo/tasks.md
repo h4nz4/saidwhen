@@ -1,9 +1,9 @@
 ## 1. Repo restructure
 
-- [ ] 1.1 Initialize git repository at E:\PROJEKTI\okf (repo is not yet under version control) and make an initial commit of the current state as the pre-restructure baseline
-- [ ] 1.2 Create `evidence/` and move `experiment/`, `example-control/`, `example-stale/`, `example-stale-control/`, and `VALIDATION.md` into it intact
-- [ ] 1.3 Fix relative links broken by the move (VALIDATION.md → experiment paths, README → VALIDATION path, results files → fixture paths)
-- [ ] 1.4 Create `validator/` and move `scripts/validate.py` to `validator/validate.py`; update the reproduce instructions in evidence/VALIDATION.md
+- [x] 1.1 Initialize git repository at E:\PROJEKTI\okf (repo is not yet under version control) and make an initial commit of the current state as the pre-restructure baseline
+- [x] 1.2 Create `evidence/` and move `experiment/`, `example-control/`, `example-stale/`, `example-stale-control/`, and `VALIDATION.md` into it intact
+- [x] 1.3 Fix relative links broken by the move (VALIDATION.md → experiment paths, README → VALIDATION path, results files → fixture paths)
+- [x] 1.4 Create `validator/` and move `scripts/validate.py` to `validator/validate.py`; update the reproduce instructions in evidence/VALIDATION.md
 
 ## 2. Convention v0.1
 

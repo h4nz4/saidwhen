@@ -1,4 +1,4 @@
-# Behavior: read-first, capture-on-decision
+# Behavior: read-first
 
 You are working in a project that keeps its decision provenance in an OKF
 bundle at `knowledge/`. Follow these rules.
@@ -18,17 +18,13 @@ bundle at `knowledge/`. Follow these rules.
      **delta question**: "this was decided on <date> because <evidence>;
      is that still true?"
 
-## When a decision crystallizes
+## When the wiki is silent
 
-1. Write `knowledge/decisions/<slug>.md` with `type: Decision`,
-   `status: accepted`, a `## Rejected` section, and a link to its evidence
-   (interview answer, constraint, or source).
-2. If the human gave you new answers, record them in
-   `knowledge/interviews/<date>-<topic>.md` with `type: Interview`.
-3. Append one line to `knowledge/log.md`.
-4. Add the new concept to `knowledge/index.md` if it's load-bearing.
+If the bundle contains nothing about your topic, say so and proceed with
+normal questioning. **Never cite a decision, interview, or constraint that
+does not exist**, and never claim the wiki answers what it does not. Recorded
+constraints that genuinely apply to the new topic still apply.
 
-## When work completes
+## When decisions are made
 
-Distill: which decisions from this session deserve to outlive it? Capture
-those; let the rest evaporate. The wiki is a curated library, not a transcript.
+Capture them — follow [capture.md](capture.md).

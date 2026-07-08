@@ -1,9 +1,13 @@
-"""Validate an OKF bundle against the Provenance Convention.
+"""Validate an OKF bundle against the saidwhen Convention (v0.1).
 
-Checks: frontmatter has `type`, relative markdown links resolve, and every
-Decision links to at least one evidence file (interview/constraint/external).
-Usage: python scripts/validate.py <bundle-dir>
+Machine-checked rules: every document has frontmatter with `type`; every
+relative markdown link resolves; every Decision links to evidence and has a
+timestamp. Exits 0 on a conformant bundle, 1 otherwise.
+
+Usage: python validate.py <bundle-dir>
+Stdlib only — vendor this single file if you want the check without the repo.
 """
+import argparse
 import re
 import sys
 from pathlib import Path
@@ -15,7 +19,7 @@ MD_LINK = re.compile(r"\[[^\]]*\]\(([^)#\s]+)\)")
 
 def validate(bundle: Path) -> list[str]:
     errors = []
-    for doc in bundle.rglob("*.md"):
+    for doc in sorted(bundle.rglob("*.md")):
         text = doc.read_text(encoding="utf-8-sig")  # tolerate Windows BOM
         rel = doc.relative_to(bundle)
 
@@ -37,13 +41,27 @@ def validate(bundle: Path) -> list[str]:
             evidence = [l for l in links if "interviews/" in l or "constraints/" in l]
             if not evidence:
                 errors.append(f"{rel}: Decision has no evidence link (interview/constraint)")
+            if not re.search(r"^timestamp:\s*\S", m.group(1), re.M):
+                errors.append(f"{rel}: Decision missing required `timestamp`")
     return errors
 
 
-if __name__ == "__main__":
-    bundle = Path(sys.argv[1] if len(sys.argv) > 1 else "knowledge")
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("bundle", nargs="?", default="knowledge", help="bundle directory (default: knowledge)")
+    parser.add_argument("--strict", action="store_true", help="reserved for future conformance levels")
+    args = parser.parse_args(argv)
+
+    bundle = Path(args.bundle)
+    if not bundle.is_dir():
+        print(f"INVALID  {bundle} is not a directory")
+        return 1
     errs = validate(bundle)
     for e in errs:
         print(f"FAIL  {e}")
     print(f"{'INVALID' if errs else 'OK'}  {bundle} ({len(list(bundle.rglob('*.md')))} documents, {len(errs)} errors)")
-    sys.exit(1 if errs else 0)
+    return 1 if errs else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

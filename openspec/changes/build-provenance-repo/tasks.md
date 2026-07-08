@@ -24,19 +24,19 @@
 
 ## 5. Adapters
 
-- [ ] 5.1 Write adapters/agents-md/: snippet embedding read-first + capture, 3-step install instructions
-- [ ] 5.2 Write adapters/claude-code/: wiki-explore, wiki-capture, wiki-gc skills (SKILL.md each) referencing behaviors content, plus install note
-- [ ] 5.3 Document the adapter sync rule (single source of behavior truth) in each adapter README
-- [ ] 5.4 Write adapters/openspec/: skill pack wrapping explore/propose/archive with wiki read + harvest (cuttable to fast-follow if it delays release)
+- [x] 5.1 Write adapters/agents-md/: snippet embedding read-first + capture, 3-step install instructions
+- [x] 5.2 Write adapters/claude-code/: wiki-explore, wiki-capture, wiki-gc skills (SKILL.md each) referencing behaviors content, plus install note
+- [x] 5.3 Document the adapter sync rule (single source of behavior truth) in each adapter README
+- [x] 5.4 Write adapters/openspec/: skill pack wrapping explore/propose/archive with wiki read + harvest (cuttable to fast-follow if it delays release)
 
 ## 6. Public surface
 
-- [ ] 6.1 Rewrite README.md for the public audience under the name **saidwhen**: pitch, diagram, 5-minute AGENTS.md quickstart, layer overview, evidence table with claim→file links
-- [ ] 6.2 Add LICENSE (MIT) and CONTRIBUTING.md (convention amendment process, behavior-edit re-validation rule, adapter how-to)
-- [ ] 6.3 Add .github/workflows/ci.yml: validator tests, validate example/knowledge, link-check README.md and CONVENTION.md
+- [x] 6.1 Rewrite README.md for the public audience under the name **saidwhen**: pitch, diagram, 5-minute AGENTS.md quickstart, layer overview, evidence table with claim→file links
+- [x] 6.2 Add LICENSE (MIT) and CONTRIBUTING.md (convention amendment process, behavior-edit re-validation rule, adapter how-to)
+- [x] 6.3 Add .github/workflows/ci.yml: validator tests, validate example/knowledge, link-check README.md and CONVENTION.md
 
 ## 7. Verification
 
-- [ ] 7.1 Run the full local check: validator tests green, example bundle validates, all README/CONVENTION/VALIDATION links resolve
-- [ ] 7.2 Fresh-eyes pass: follow the quickstart verbatim in a scratch project and confirm a wiki-aware agent session works end to end
-- [ ] 7.3 Re-run one treatment scenario (round-1 prompt) against the restructured repo to confirm the moved behaviors still produce a passing run
+- [x] 7.1 Run the full local check: validator tests green, example bundle validates, all README/CONVENTION/VALIDATION links resolve
+- [x] 7.2 Fresh-eyes pass: follow the quickstart verbatim in a scratch project and confirm a wiki-aware agent session works end to end (agent captured decision+interview+log+index from AGENTS.md snippet alone; bundle validates: 4 documents, 0 errors)
+- [x] 7.3 Re-run one treatment scenario (round-1 prompt) against the restructured repo to confirm the moved behaviors still produce a passing run (PASS on all rubric criteria; transcript in session scratchpad regression-run-1.md)

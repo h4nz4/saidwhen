@@ -29,8 +29,8 @@ re-interviewing, no blind obedience.
 | [CONVENTION.md](CONVENTION.md) | The standard: layout, concept types, linking rules. One page. |
 | [behaviors/read-first.md](behaviors/read-first.md) | The agent behavior: read wiki first, never re-ask, capture decisions. |
 | [example/](example/) | A filled-in project (TaskLite) with a working provenance chain. |
-| [scripts/validate.py](scripts/validate.py) | Bundle validator: frontmatter, links, decision-evidence rule. Stdlib only. |
-| [VALIDATION.md](VALIDATION.md) | Pre-registered A/B experiments: 54 runs, 4 use cases, each independently p ≈ 0.0011 (< 0.005). |
+| [validator/validate.py](validator/validate.py) | Bundle validator: frontmatter, links, decision-evidence rule. Stdlib only. |
+| [evidence/VALIDATION.md](evidence/VALIDATION.md) | Pre-registered A/B experiments: 54 runs, 4 use cases, each independently p ≈ 0.0011 (< 0.005). |
 
 ## How it's different from agent-memory tools
 

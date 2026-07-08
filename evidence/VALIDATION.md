@@ -9,8 +9,8 @@ statistical replication (n=6 per arm).
 
 ## Hypothesis
 
-An agent given (a) an OKF knowledge bundle following [CONVENTION.md](CONVENTION.md)
-and (b) the [read-first behavior](behaviors/read-first.md) will, when asked to
+An agent given (a) an OKF knowledge bundle following [CONVENTION.md](../CONVENTION.md)
+and (b) the [read-first behavior](../behaviors/read-first.md) will, when asked to
 implement something that was previously rejected:
 
 - **H1 (recall):** find and cite the prior decision and its human evidence unprompted;
@@ -24,7 +24,7 @@ option and/or re-interview the human.
 
 | | Treatment | Control |
 |---|---|---|
-| Working dir | [example/](example/) | [example-control/](example-control/) |
+| Working dir | [example/](../example/) | [example-control/](example-control/) |
 | Specs | identical (magic-link auth) | identical, minus `([why](...))` links |
 | `knowledge/` bundle | present (6 docs, validates OK) | absent |
 | Behavior instruction | read-first.md | none |
@@ -126,8 +126,8 @@ rule was never triggered — `behaviors/read-first.md` needed no amendment.
 
 ## Reproduce
 
-1. `python scripts/validate.py example/knowledge` → expect `OK`.
+1. From the repo root: `python validator/validate.py example/knowledge` → expect `OK`.
 2. Give one agent the treatment prompt (workdir `example/`, follow
    `behaviors/read-first.md`) and one the control prompt (workdir
-   `example-control/`), task: *"add Sign in with Google — evaluate and propose."*
+   `evidence/example-control/`), task: *"add Sign in with Google — evaluate and propose."*
 3. Score against H1–H3.

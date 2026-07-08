@@ -1,0 +1,8 @@
+# Maintainer tooling, not part of the published convention (root only —
+# nested .claude/ dirs, e.g. experiment fixtures, are tracked content)
+/.claude/
+/openspec/
+
+# Python artifacts
+__pycache__/
+*.pyc

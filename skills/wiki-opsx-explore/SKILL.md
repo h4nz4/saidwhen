@@ -1,6 +1,6 @@
 ---
 name: wiki-opsx-explore
-description: OpenSpec explore mode with saidwhen provenance — think through ideas grounded in the project's recorded decisions, constraints, and interview answers. Use instead of plain explore when the project has a knowledge/ bundle.
+description: OpenSpec explore mode with saidwhen provenance — think through ideas grounded in the project's recorded decisions, constraints, and interview answers. Use instead of plain explore when the project has a docs/knowledge/ bundle.
 ---
 
 # wiki-opsx-explore
@@ -13,7 +13,7 @@ apply these rules — verbatim from saidwhen read-first v0.1 (normative source:
 <!-- saidwhen:behavior read-first v0.1 -->
 ## Before planning or asking anything
 
-1. Read `knowledge/index.md`. Follow links relevant to your current task
+1. Read `docs/knowledge/index.md`. Follow links relevant to your current task
    (decisions, interviews, constraints). Budget: read what's relevant, not
    the whole bundle.
 2. **Never ask the human a question the wiki already answers.** If an

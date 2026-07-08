@@ -1,18 +1,18 @@
 ---
 name: wiki-explore
-description: Consult the project's saidwhen knowledge bundle (knowledge/) before planning, proposing, or asking the user anything. Use at the start of any feature evaluation, design discussion, or requirements question — and whenever a request might touch a recorded decision.
+description: Consult the project's saidwhen knowledge bundle (docs/knowledge/) before planning, proposing, or asking the user anything. Use at the start of any feature evaluation, design discussion, or requirements question — and whenever a request might touch a recorded decision.
 ---
 
 # wiki-explore
 
-This project keeps decision provenance in an OKF bundle at `knowledge/`.
+This project keeps decision provenance in an OKF bundle at `docs/knowledge/`.
 Apply these rules — verbatim from saidwhen read-first v0.1 (normative source:
 `behaviors/read-first.md`; CI keeps this copy in sync):
 
 <!-- saidwhen:behavior read-first v0.1 -->
 ## Before planning or asking anything
 
-1. Read `knowledge/index.md`. Follow links relevant to your current task
+1. Read `docs/knowledge/index.md`. Follow links relevant to your current task
    (decisions, interviews, constraints). Budget: read what's relevant, not
    the whole bundle.
 2. **Never ask the human a question the wiki already answers.** If an

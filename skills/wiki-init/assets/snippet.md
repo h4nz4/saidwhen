@@ -3,13 +3,13 @@
 
 # Project knowledge (saidwhen)
 
-This project keeps its decision provenance in an OKF bundle at `knowledge/`.
+This project keeps its decision provenance in an OKF bundle at `docs/knowledge/`.
 Follow these rules.
 
 <!-- saidwhen:behavior read-first v0.1 -->
 ## Before planning or asking anything
 
-1. Read `knowledge/index.md`. Follow links relevant to your current task
+1. Read `docs/knowledge/index.md`. Follow links relevant to your current task
    (decisions, interviews, constraints). Budget: read what's relevant, not
    the whole bundle.
 2. **Never ask the human a question the wiki already answers.** If an
@@ -33,15 +33,15 @@ constraints that genuinely apply to the new topic still apply.
 <!-- saidwhen:behavior capture v0.1 -->
 ## When a decision crystallizes
 
-1. Write `knowledge/decisions/<slug>.md` with `type: Decision`,
+1. Write `docs/knowledge/decisions/<slug>.md` with `type: Decision`,
    `status: accepted`, a `timestamp`, a `## Rejected` section (with revisit
    triggers where they exist), and a link to its evidence (interview answer,
    constraint, or source).
 2. If the human gave you new answers, record them in
-   `knowledge/interviews/<date>-<topic>.md` with `type: Interview`.
-3. Append one line to `knowledge/log.md`:
+   `docs/knowledge/interviews/<date>-<topic>.md` with `type: Interview`.
+3. Append one line to `docs/knowledge/log.md`:
    `YYYY-MM-DD  <path>  <created|updated|superseded>  <one-line reason>`.
-4. Add the new concept to `knowledge/index.md` if it's load-bearing.
+4. Add the new concept to `docs/knowledge/index.md` if it's load-bearing.
 
 ## When superseding a decision
 

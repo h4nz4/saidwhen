@@ -83,7 +83,7 @@ def check_specs(specs_path: Path) -> list[str]:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("bundle", nargs="?", default="knowledge", help="bundle directory (default: knowledge)")
+    parser.add_argument("bundle", nargs="?", default="docs/knowledge", help="bundle directory (default: docs/knowledge)")
     parser.add_argument("--check-specs", metavar="PATH", action="append",
                         help="also check a specs/docs directory or single .md file: links must resolve and must not cite superseded decisions (repeatable)")
     parser.add_argument("--strict", action="store_true", help="reserved for future conformance levels")

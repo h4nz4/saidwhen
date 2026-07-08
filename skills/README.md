@@ -9,7 +9,7 @@ to run without this repo.
 
 | Skill | What it does |
 |---|---|
-| [wiki-init](wiki-init/) | Scaffold a `knowledge/` bundle; optionally install the ambient AGENTS.md snippet |
+| [wiki-init](wiki-init/) | Scaffold a `docs/knowledge/` bundle; optionally install the ambient AGENTS.md snippet |
 | [wiki-explore](wiki-explore/) | Read-first: consult the wiki before planning or asking anything |
 | [wiki-capture](wiki-capture/) | Record decisions/interviews at the moment they crystallize (bundles the validator as `scripts/validate.py`) |
 | [wiki-gc](wiki-gc/) | Periodic curation: merge, flag stale, repair links, prune, find gaps |
@@ -40,6 +40,6 @@ to run without this repo.
 - Skills work without this repo present; the `behaviors/` references inside
   them name the normative source, not a runtime dependency.
 - Your project docs (including AGENTS.md/CLAUDE.md) can carry
-  `([why](...))` links into `knowledge/` too — the bundled validator's
+  `([why](...))` links into `docs/knowledge/` too — the bundled validator's
   `--check-specs <dir>` flags broken links *and* citations of superseded
   decisions, so docs rot becomes a CI failure instead of a surprise.

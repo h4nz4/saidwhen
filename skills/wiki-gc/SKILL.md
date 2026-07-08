@@ -1,11 +1,11 @@
 ---
 name: wiki-gc
-description: Curate the project's saidwhen knowledge bundle (knowledge/) — merge duplicate concepts, flag stale decisions whose revisit triggers fired, repair broken links, prune the index, and list knowledge gaps. Use periodically or when the wiki feels stale.
+description: Curate the project's saidwhen knowledge bundle (docs/knowledge/) — merge duplicate concepts, flag stale decisions whose revisit triggers fired, repair broken links, prune the index, and list knowledge gaps. Use periodically or when the wiki feels stale.
 ---
 
 # wiki-gc
 
-This project keeps decision provenance in an OKF bundle at `knowledge/`.
+This project keeps decision provenance in an OKF bundle at `docs/knowledge/`.
 Apply these rules — verbatim from saidwhen gc v0.1 (normative source:
 `behaviors/gc.md`; CI keeps this copy in sync):
 
@@ -29,7 +29,7 @@ Apply these rules — verbatim from saidwhen gc v0.1 (normative source:
 
 ## Rules
 
-- Every change made by this pass appends a line to `knowledge/log.md`.
+- Every change made by this pass appends a line to `docs/knowledge/log.md`.
 - This pass never deletes a Decision — supersession preserves history.
 - Run the validator after the pass; the bundle must still conform.
 <!-- /saidwhen:behavior gc -->

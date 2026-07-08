@@ -17,11 +17,11 @@ jobs:
       - name: Validate example bundle and spec provenance links
         run: python validator/validate.py example/knowledge --check-specs example/openspec/specs
       - name: Validate project bundle
-        run: python validator/validate.py knowledge
+        run: python validator/validate.py docs/knowledge
       - name: Behavior/skill sync guard
         run: python validator/check_sync.py
       - name: Validate evidence fixture bundles
         run: |
           python validator/validate.py evidence/example-stale/knowledge
       - name: Provenance-check public documents (links + superseded citations)
-        run: python validator/validate.py knowledge --check-specs README.md --check-specs CONVENTION.md --check-specs CONTRIBUTING.md --check-specs evidence/VALIDATION.md
+        run: python validator/validate.py docs/knowledge --check-specs README.md --check-specs CONVENTION.md --check-specs CONTRIBUTING.md --check-specs evidence/VALIDATION.md

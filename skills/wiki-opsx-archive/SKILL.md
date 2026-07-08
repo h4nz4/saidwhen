@@ -1,6 +1,6 @@
 ---
 name: wiki-opsx-archive
-description: Archive a completed OpenSpec change and harvest its crystallized decisions into the saidwhen knowledge bundle. Use instead of plain archive when the project has a knowledge/ bundle.
+description: Archive a completed OpenSpec change and harvest its crystallized decisions into the saidwhen knowledge bundle. Use instead of plain archive when the project has a docs/knowledge/ bundle.
 ---
 
 # wiki-opsx-archive
@@ -13,7 +13,7 @@ Run the standard OpenSpec archive flow, then **harvest before you forget**:
    `openspec/changes/`**: archived changes move (and are often gitignored),
    so those paths are ephemeral. If the decision's evidence was a
    conversation during this change, copy it into
-   `knowledge/interviews/<date>-<topic>.md` rather than pointing at change
+   `docs/knowledge/interviews/<date>-<topic>.md` rather than pointing at change
    artifacts.
 3. Harvest is distillation: a 10-task change usually yields 1–3 durable
    decisions, not 10.
@@ -24,15 +24,15 @@ Capture rules — verbatim from saidwhen capture v0.1 (normative source:
 <!-- saidwhen:behavior capture v0.1 -->
 ## When a decision crystallizes
 
-1. Write `knowledge/decisions/<slug>.md` with `type: Decision`,
+1. Write `docs/knowledge/decisions/<slug>.md` with `type: Decision`,
    `status: accepted`, a `timestamp`, a `## Rejected` section (with revisit
    triggers where they exist), and a link to its evidence (interview answer,
    constraint, or source).
 2. If the human gave you new answers, record them in
-   `knowledge/interviews/<date>-<topic>.md` with `type: Interview`.
-3. Append one line to `knowledge/log.md`:
+   `docs/knowledge/interviews/<date>-<topic>.md` with `type: Interview`.
+3. Append one line to `docs/knowledge/log.md`:
    `YYYY-MM-DD  <path>  <created|updated|superseded>  <one-line reason>`.
-4. Add the new concept to `knowledge/index.md` if it's load-bearing.
+4. Add the new concept to `docs/knowledge/index.md` if it's load-bearing.
 
 ## When superseding a decision
 

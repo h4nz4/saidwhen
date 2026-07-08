@@ -8,7 +8,7 @@ timestamp: 2026-07-08T02:30:00Z
 # saidwhen knowledge base
 
 Decision provenance for the saidwhen project itself. The demo bundle lives in
-[example/knowledge/](../example/knowledge/); this one is real.
+[example/knowledge/](../../example/knowledge/); this one is real.
 
 ## Decisions
 

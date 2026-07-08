@@ -12,7 +12,7 @@ see [evidence/VALIDATION.md](evidence/VALIDATION.md).
 ## Layout
 
 ```
-knowledge/            ← an OKF bundle
+docs/knowledge/       ← an OKF bundle
 ├── index.md          ← entry point; agents read this FIRST
 ├── log.md            ← append-only chronological history
 ├── decisions/        ← type: Decision

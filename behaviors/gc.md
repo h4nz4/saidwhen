@@ -1,7 +1,7 @@
 # Behavior: gc (periodic curation)
 
 Wikis rot. Run this pass periodically (or when the bundle feels stale) to
-keep `knowledge/` a curated library instead of a graveyard.
+keep `docs/knowledge/` a curated library instead of a graveyard.
 
 <!-- saidwhen:behavior gc v0.1 -->
 ## The pass
@@ -23,7 +23,7 @@ keep `knowledge/` a curated library instead of a graveyard.
 
 ## Rules
 
-- Every change made by this pass appends a line to `knowledge/log.md`.
+- Every change made by this pass appends a line to `docs/knowledge/log.md`.
 - This pass never deletes a Decision — supersession preserves history.
 - Run the validator after the pass; the bundle must still conform.
 <!-- /saidwhen:behavior gc -->

@@ -51,9 +51,9 @@ scoring with published raw outputs).
 
 ### And this repo runs on it
 
-[knowledge/](knowledge/) is saidwhen's own live bundle, not a demo. Why is
-the product skills-first? [The decision](knowledge/decisions/skills-first-distribution.md)
-answers, linked to the [interview](knowledge/interviews/2026-07-08-distribution-strategy.md)
+[docs/knowledge/](docs/knowledge/) is saidwhen's own live bundle, not a demo. Why is
+the product skills-first? [The decision](docs/knowledge/decisions/skills-first-distribution.md)
+answers, linked to the [interview](docs/knowledge/interviews/2026-07-08-distribution-strategy.md)
 that justified it — the same chain the diagram above promises you. CI
 validates the bundle, and checks this README against it for broken links
 *and* citations of superseded decisions, on every push. saidwhen itself is
@@ -68,14 +68,14 @@ use daily.
    (Codex), or your agent's equivalent
    ([install matrix](skills/README.md)). Minimal set: `wiki-init`,
    `wiki-explore`, `wiki-capture`.
-2. Ask your agent to set up provenance — `wiki-init` scaffolds `knowledge/`
+2. Ask your agent to set up provenance — `wiki-init` scaffolds `docs/knowledge/`
    and offers the [AGENTS.md snippet](skills/wiki-init/assets/snippet.md), the
    ambient fallback for agents without Agent Skills support.
-3. Work normally. Your agent now reads `knowledge/` before asking you
+3. Work normally. Your agent now reads `docs/knowledge/` before asking you
    anything, and writes decisions when they crystallize.
 
 Optional: vendor [validator/validate.py](validator/validate.py) (one stdlib
-file) and run `python validate.py knowledge` in CI — the wiki-capture skill
+file) and run `python validate.py docs/knowledge` in CI — the wiki-capture skill
 also bundles it. [OpenSpec](https://github.com/Fission-AI/OpenSpec) user?
 Install the `wiki-opsx-*` skills — explore consults the wiki first, archive
 harvests decisions into it.
@@ -87,7 +87,7 @@ can carry the same why-links as specs — like this real one:
 ([why](example/knowledge/decisions/magic-link-auth.md)). Then
 
 ```
-python validator/validate.py knowledge --check-specs docs --check-specs openspec/specs
+python validator/validate.py docs/knowledge --check-specs AGENTS.md --check-specs openspec/specs
 ```
 
 fails CI when a link breaks **or when a cited decision has been superseded**:

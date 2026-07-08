@@ -21,6 +21,14 @@ FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 MD_LINK = re.compile(r"\[[^\]]*\]\(([^)#\s]+)\)")
 
 
+def md_links(text: str) -> list[str]:
+    """Links outside code — a link inside `backticks` or a ``` fence is syntax
+    documentation (e.g. `([why](...))`), not a live link to resolve."""
+    text = re.sub(r"```.*?```", "", text, flags=re.S)
+    text = re.sub(r"`[^`]*`", "", text)
+    return MD_LINK.findall(text)
+
+
 def validate(bundle: Path) -> list[str]:
     errors = []
     for doc in sorted(bundle.rglob("*.md")):
@@ -36,7 +44,7 @@ def validate(bundle: Path) -> list[str]:
             errors.append(f"{rel}: frontmatter missing required `type`")
             continue
 
-        links = [l for l in MD_LINK.findall(text) if not l.startswith(("http://", "https://"))]
+        links = [l for l in md_links(text) if not l.startswith(("http://", "https://"))]
         for link in links:
             if not (doc.parent / link).resolve().exists():
                 errors.append(f"{rel}: broken link -> {link}")
@@ -55,7 +63,7 @@ def check_specs(specs_path: Path) -> list[str]:
     docs = [specs_path] if specs_path.is_file() else sorted(specs_path.rglob("*.md"))
     for doc in docs:
         text = doc.read_text(encoding="utf-8-sig")
-        for link in MD_LINK.findall(text):
+        for link in md_links(text):
             if link.startswith(("http://", "https://")):
                 continue
             target = (doc.parent / link).resolve()
@@ -66,7 +74,7 @@ def check_specs(specs_path: Path) -> list[str]:
                 if fm and re.search(r"^type:\s*Decision\s*$", fm.group(1), re.M) \
                       and re.search(r"^status:\s*superseded\s*$", fm.group(1), re.M):
                     # ponytail: successor hint = first decisions/ link in the stale doc
-                    succ = [l for l in MD_LINK.findall(target.read_text(encoding="utf-8-sig"))
+                    succ = [l for l in md_links(target.read_text(encoding="utf-8-sig"))
                             if "decisions/" in l]
                     hint = f" (successor: {succ[0]})" if succ else ""
                     errors.append(f"{doc.as_posix()}: cites superseded decision -> {link}{hint}")

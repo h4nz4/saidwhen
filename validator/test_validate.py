@@ -94,6 +94,19 @@ class ValidateTests(unittest.TestCase):
                 encoding="utf-8")
             self.assertEqual(main([str(self.bundle), "--check-specs", specs]), 0)
 
+    def test_check_specs_ignores_link_in_code_span(self):
+        # A link shown inside backticks documents the syntax; it must not be
+        # resolved. Regression: bare `...` passed only on Windows (trailing-dot
+        # stripping) and broke Linux CI.
+        self.write("decisions/d.md", GOOD_DECISION)
+        self.write("interviews/talk.md", INTERVIEW)
+        with tempfile.TemporaryDirectory() as specs:
+            (Path(specs) / "spec.md").write_text(
+                "Every requirement carries a `([why](...))` link.\n"
+                f"### Requirement: X\nMUST hold. ([why]({(self.bundle / 'decisions' / 'd.md').as_posix()}))",
+                encoding="utf-8")
+            self.assertEqual(main([str(self.bundle), "--check-specs", specs]), 0)
+
     def test_check_specs_superseded_citation_fails(self):
         self.write("decisions/new.md", GOOD_DECISION)
         self.write("decisions/old.md", GOOD_DECISION.replace(

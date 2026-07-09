@@ -1,0 +1,11 @@
+{
+  "name": "saidwhen",
+  "description": "Agent-maintained project wiki in a loop with OpenSpec — one OKF bundle serving agents as memory, the spec workflow as its knowledge layer, and humans as a rendered site.",
+  "version": "1.0.0",
+  "author": {
+    "name": "h4nz4",
+    "url": "https://github.com/h4nz4/saidwhen"
+  },
+  "homepage": "https://github.com/h4nz4/saidwhen",
+  "license": "MIT"
+}

@@ -14,10 +14,12 @@ No passwords are stored; no third-party OAuth providers are integrated.
 
 ## Evidence
 
-- [Interview 2026-07-08 with Ivan](../interviews/2026-07-08-auth-scope.md):
-  users are external freelancers with no corporate identity provider, and the
-  project is [solo-maintained](../constraints/solo-maintainer.md) — auth must
-  be near-zero maintenance.
+- [Users are external freelancers](../constraints/external-users.md) — no
+  corporate IdP to integrate with.
+- [Solo maintainer](../constraints/solo-maintainer.md) — auth must be
+  near-zero maintenance.
+- [No password storage](../constraints/no-password-storage.md) — the owner
+  rejects password liability outright.
 
 ## Rejected
 
@@ -26,5 +28,6 @@ No passwords are stored; no third-party OAuth providers are integrated.
   OAuth provider adds credential rotation, console setup, and breakage surface
   a [solo maintainer](../constraints/solo-maintainer.md) cannot afford.
   Revisit if a significant user segment demands social login.
-- **Passwords** — rejected: storage, reset flows, and breach liability are the
-  highest-maintenance option.
+- **Passwords** — rejected outright per the
+  [no-password-storage](../constraints/no-password-storage.md) fact: storage,
+  reset flows, and breach liability are the highest-maintenance option.

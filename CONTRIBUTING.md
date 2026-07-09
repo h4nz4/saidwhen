@@ -3,10 +3,13 @@
 ## The one rule that isn't normal
 
 **Semantic edits to `behaviors/*.md` require re-validation before merge.**
-The behavior wording is not prose — it's the tested artifact. It went 27/27
-treatment runs across three pre-registered experiment rounds without a single
-rubric failure ([evidence/VALIDATION.md](evidence/VALIDATION.md)). If your PR
-changes what a behavior *instructs* (not typos/formatting):
+The behavior wording is not prose — it's the tested artifact: the v0.1
+wording went 27/27 treatment runs across three pre-registered experiment
+rounds without a single rubric failure
+([evidence/VALIDATION.md](evidence/VALIDATION.md)), and the v1.0 rewording
+is itself gated on the pending wiki-first round (see
+[the pivot decision](docs/knowledge/decisions/okf-wiki-pivot.md)). If your
+PR changes what a behavior *instructs* (not typos/formatting):
 
 1. Re-run at least the round-1 scenario: one agent in
    [example/](example/) following your edited behavior, task *"add Sign in
@@ -19,11 +22,12 @@ good it sounds.
 
 ## Amending the convention
 
-CONVENTION.md is versioned (currently v0.1). Amendments go through an issue
+CONVENTION.md is versioned (currently v1.0). Amendments go through an issue
 first: state the problem, the proposed rule, and its migration cost.
 Amendments MUST be backward-compatible within the major version — a
-conformant v0.1 bundle stays conformant through every v0.x. Breaking rules
-wait for v1.0 and need a migration note.
+conformant v1.0 bundle stays conformant through every v1.x. Breaking rules
+wait for the next major version and need a migration note (v1.0 itself
+carries the "Migrating a v0.1 bundle" appendix).
 
 Changes to machine-checked conformance rules must land together with the
 matching [validator](validator/) change and tests.
@@ -55,9 +59,10 @@ Two guardrails beyond wording sync:
 
 - Evidence under [evidence/](evidence/) is immutable history — link fixes
   only, never content edits.
-- Validator stays single-file and stdlib-only; that constraint is the
-  product.
+- Validator and renderer stay single-file and stdlib-only; that constraint
+  is the product.
 - Run before pushing, from the repo root: `python -m unittest discover -s
-  validator`, `python validator/validate.py example/knowledge --check-specs
-  example/openspec/specs`, `python validator/validate.py knowledge`, and
-  `python validator/check_sync.py`.
+  validator`, `python -m unittest discover -s render`,
+  `python validator/validate.py example/knowledge --check-specs
+  example/openspec/specs`, `python validator/validate.py docs/knowledge`,
+  and `python validator/check_sync.py`.

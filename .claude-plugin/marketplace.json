@@ -1,0 +1,14 @@
+{
+  "name": "saidwhen",
+  "owner": {
+    "name": "h4nz4",
+    "url": "https://github.com/h4nz4"
+  },
+  "plugins": [
+    {
+      "name": "saidwhen",
+      "source": "./",
+      "description": "Agent-maintained project wiki in a loop with OpenSpec — installs the full wiki-* skill suite (init, bootstrap, explore, capture, render, gc, and the OpenSpec loop)."
+    }
+  ]
+}

@@ -1,17 +1,22 @@
-# Behavior: capture-on-decision
+# Behavior: capture
 
-You are working in a project that keeps its decision provenance in an OKF
-bundle at `docs/knowledge/`. When knowledge crystallizes, record it.
+You are working in a project whose wiki — an OKF bundle at
+`docs/knowledge/` — is the project's memory. When knowledge crystallizes,
+record it as attributed facts.
 
-<!-- saidwhen:behavior capture v0.1 -->
-## When a decision crystallizes
+<!-- saidwhen:behavior capture v1.0 -->
+## When knowledge crystallizes
 
-1. Write `docs/knowledge/decisions/<slug>.md` with `type: Decision`,
-   `status: accepted`, a `timestamp`, a `## Rejected` section (with revisit
-   triggers where they exist), and a link to its evidence (interview answer,
-   constraint, or source).
-2. If the human gave you new answers, record them in
-   `docs/knowledge/interviews/<date>-<topic>.md` with `type: Interview`.
+1. Record each settled human answer as an **attributed fact**: a distilled
+   statement in `docs/knowledge/constraints/<slug>.md` (a fact that bounds
+   the design), `domain/<slug>.md` (a fact about meaning), or
+   `systems/<slug>.md` (curated architecture), with `source:` (who said
+   it) and `timestamp:` (when). No dialogue transcripts, no verbatim
+   quotes — the distilled statement itself, attributed and dated.
+2. When a decision crystallizes, write `docs/knowledge/decisions/<slug>.md`
+   with `type: Decision`, `status: accepted`, a `timestamp`, a
+   `## Rejected` section (with revisit triggers where they exist), and a
+   link to its evidence — the attributed fact(s) or an external source.
 3. Append one line to `docs/knowledge/log.md`:
    `YYYY-MM-DD  <path>  <created|updated|superseded>  <one-line reason>`.
 4. Add the new concept to `docs/knowledge/index.md` if it's load-bearing.
@@ -24,6 +29,7 @@ evidence, and log the supersession.
 
 ## When work completes
 
-Distill: which decisions from this session deserve to outlive it? Capture
-those; let the rest evaporate. The wiki is a curated library, not a transcript.
+Distill: which knowledge from this session deserves to outlive it? Capture
+that; let the rest evaporate. The wiki is a curated library, not a
+transcript.
 <!-- /saidwhen:behavior capture -->

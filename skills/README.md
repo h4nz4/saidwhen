@@ -1,22 +1,45 @@
 # Skills
 
-saidwhen's primary deliverable: six self-contained skills in the open
-[Agent Skills](https://agentskills.io/home) format (SKILL.md). Copy a skill's
-directory into your agent's skills folder — that's the whole install. Each
-skill embeds its behavior wording verbatim (normative source:
-[behaviors/](../behaviors/), machine-checked in CI) and bundles what it needs
-to run without this repo.
+saidwhen's primary deliverable: eight self-contained skills in the open
+[Agent Skills](https://agentskills.io/home) format (SKILL.md) that together
+maintain a project wiki — an OKF bundle at `docs/knowledge/` serving agents
+as project memory, [OpenSpec](https://github.com/Fission-AI/OpenSpec) as its
+knowledge layer, and humans via compiled views. Copy a skill's directory
+into your agent's skills folder — that's the whole install. Each skill
+embeds its behavior wording verbatim (normative source:
+[behaviors/](../behaviors/), machine-checked in CI) and bundles what it
+needs to run without this repo.
 
 | Skill | What it does |
 |---|---|
-| [wiki-init](wiki-init/) | Scaffold a `docs/knowledge/` bundle; optionally install the ambient AGENTS.md snippet |
-| [wiki-explore](wiki-explore/) | Read-first: consult the wiki before planning or asking anything |
-| [wiki-capture](wiki-capture/) | Record decisions/interviews at the moment they crystallize (bundles the validator as `scripts/validate.py`) |
-| [wiki-gc](wiki-gc/) | Periodic curation: merge, flag stale, repair links, prune, find gaps |
-| [wiki-opsx-explore](wiki-opsx-explore/) | OpenSpec explore, wiki-first; why-link convention for delta specs |
-| [wiki-opsx-archive](wiki-opsx-archive/) | OpenSpec archive, then harvest decisions into the bundle |
+| [wiki-init](wiki-init/) | Scaffold the `docs/knowledge/` wiki; optionally install the ambient AGENTS.md snippet and CI |
+| [wiki-bootstrap](wiki-bootstrap/) | Populate a fresh wiki from an existing codebase — architecture pages, glossary, use cases; proposes, never invents whys |
+| [wiki-explore](wiki-explore/) | Read-first: the wiki is project memory — consult it before planning, asking, or spelunking code |
+| [wiki-capture](wiki-capture/) | Record knowledge as attributed facts and decisions at the moment it crystallizes (bundles the validator as `scripts/validate.py`) |
+| [wiki-render](wiki-render/) | Compile the wiki into a browsable static HTML site — disposable views, zero LLM tokens (bundles the renderer) |
+| [wiki-gc](wiki-gc/) | Periodic curation: merge, flag stale, audit Component drift, repair links, prune, find gaps |
+| [wiki-opsx-explore](wiki-opsx-explore/) | OpenSpec explore/propose, wiki-first: recorded context flows into proposals by link |
+| [wiki-opsx-archive](wiki-opsx-archive/) | OpenSpec archive: harvest facts and decisions into the wiki, update affected Component pages |
 
-## Install paths
+## Install
+
+One command, either channel:
+
+```bash
+# Any agent (Claude Code, Cursor, Codex, 20+ others)
+npx skills add h4nz4/saidwhen
+
+# Claude Code — full suite as a plugin
+/plugin marketplace add h4nz4/saidwhen
+/plugin install saidwhen@saidwhen
+```
+
+`npx skills add` is the vendor-neutral path (skills.sh reads the
+`skills/<name>/SKILL.md` layout directly); the plugin marketplace is the
+Claude Code convenience, offered alongside — never the only path. `add`
+without a skill name pulls the whole suite; append names for a subset.
+
+### Or copy the directories manually
 
 | Agent | Project-level | User-level |
 |---|---|---|
@@ -42,4 +65,6 @@ to run without this repo.
 - Your project docs (including AGENTS.md/CLAUDE.md) can carry
   `([why](...))` links into `docs/knowledge/` too — the bundled validator's
   `--check-specs <dir>` flags broken links *and* citations of superseded
-  decisions, so docs rot becomes a CI failure instead of a surprise.
+  decisions, and `--check-diff` maps a diff's changed paths back to the
+  decisions that govern them, so docs rot and forgotten constraints both
+  become CI findings instead of surprises.

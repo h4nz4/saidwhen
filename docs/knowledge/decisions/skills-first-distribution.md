@@ -5,6 +5,7 @@ description: saidwhen's primary deliverable is a top-level skills/ directory of 
 status: accepted
 timestamp: 2026-07-08T02:30:00Z
 tags: [distribution, adapters]
+scope: skills/*
 ---
 
 # Skills-first distribution
@@ -30,6 +31,18 @@ the snippet's canonical home is `skills/wiki-init/assets/snippet.md` — there
 is no standalone `adapters/` directory. `skills/` is the entire product
 surface; `behaviors/` remains only as the normative wording anchor for the
 CI sync guard.
+
+**Amended 2026-07-09** (evidence:
+[trending-repo goal](../interviews/2026-07-09-trending-goal.md)): manual
+copy stops being the *only* install path. The repo ships two one-command
+channels off the unchanged `skills/<name>/SKILL.md` layout — `npx skills add
+h4nz4/saidwhen` (skills.sh, multi-agent, the vendor-neutral primary) and a
+Claude Code plugin/marketplace (`.claude-plugin/plugin.json` +
+`marketplace.json`, offered alongside, never sole). The Claude-specific
+channel is admissible only because the neutral one leads, per
+[no-vendor-lock-in](../constraints/no-vendor-lock-in.md); manual copy remains
+documented as the zero-tooling fallback. Rejected making the plugin the
+headline install (Claude-only front door contradicts the constraint).
 
 ## Evidence
 

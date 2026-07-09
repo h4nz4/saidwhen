@@ -14,6 +14,8 @@ jobs:
           python-version: "3.12"
       - name: Validator self-tests
         run: python -m unittest discover -s validator -v
+      - name: Render smoke tests
+        run: python -m unittest discover -s render -v
       - name: Validate example bundle and spec provenance links
         run: python validator/validate.py example/knowledge --check-specs example/openspec/specs
       - name: Validate project bundle
@@ -25,3 +27,11 @@ jobs:
           python validator/validate.py evidence/example-stale/knowledge
       - name: Provenance-check public documents (links + superseded citations)
         run: python validator/validate.py docs/knowledge --check-specs README.md --check-specs CONVENTION.md --check-specs CONTRIBUTING.md --check-specs evidence/VALIDATION.md
+      - name: Render project wiki
+        run: python render/wiki_render.py docs/knowledge -o wiki-site
+      - name: Publish wiki site
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: wiki-site
+          path: wiki-site

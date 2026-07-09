@@ -18,6 +18,7 @@ BLOCK = re.compile(r"<!-- saidwhen:behavior (\S+)[^>]*-->\n(.*?)<!-- /saidwhen:b
 # (canonical file, glob of bundled copies that must stay byte-identical)
 COPIES = [
     ("validator/validate.py", "skills/*/scripts/validate.py"),
+    ("render/wiki_render.py", "skills/*/scripts/wiki_render.py"),
 ]
 # ponytail: guard checks blocks that exist; a skill that silently drops its
 # marker block escapes — add a required-coverage map if that ever happens.

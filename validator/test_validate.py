@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from validate import validate, main
+from validate import check_bloat, check_diff, validate, main
 
 GOOD_DECISION = """---
 type: Decision
@@ -157,6 +157,70 @@ class ValidateTests(unittest.TestCase):
             (Path(bad_dir) / "broken.md").write_text("[gone](nope.md)", encoding="utf-8")
             self.assertEqual(
                 main([str(self.bundle), "--check-specs", ok_dir, "--check-specs", bad_dir]), 1)
+
+    def test_fact_evidence_accepted(self):
+        # v1.0: an attributed fact (domain/ or systems/) is valid Decision evidence
+        (self.bundle / "domain").mkdir()
+        self.write("domain/tenant.md",
+                   "---\ntype: Term\nsource: Ivan\ntimestamp: 2026-07-08T09:00:00Z\n---\nA tenant is one org.")
+        self.write("decisions/d.md", GOOD_DECISION.replace(
+            "[interview](../interviews/talk.md)", "[fact](../domain/tenant.md)"))
+        self.assertEqual(validate(self.bundle), [])
+
+    def test_source_without_timestamp_reported(self):
+        self.write("decisions/d.md", GOOD_DECISION)
+        self.write("interviews/talk.md", INTERVIEW)
+        (self.bundle / "constraints").mkdir()
+        self.write("constraints/eur.md", "---\ntype: Constraint\nsource: Ivan\n---\nEUR only.")
+        errs = validate(self.bundle)
+        self.assertTrue(any("missing required `timestamp`" in e and "constraints" in e for e in errs))
+
+    def test_v01_interview_evidence_still_valid(self):
+        # regression: v0.1 bundles (interview evidence, no source fields) stay conformant
+        self.write("decisions/d.md", GOOD_DECISION)
+        self.write("interviews/talk.md", INTERVIEW)
+        self.assertEqual(validate(self.bundle), [])
+
+    def test_check_diff_scope_hit(self):
+        self.write("decisions/d.md", GOOD_DECISION.replace(
+            "status: accepted", "status: accepted\nscope: index.html src/auth/*"))
+        self.write("interviews/talk.md", INTERVIEW)
+        hits = check_diff(self.bundle, ["src/auth/login.js", "README.md", "index.html"])
+        self.assertEqual(len(hits), 1)
+        self.assertIn("decisions/d.md", hits[0])
+        self.assertIn("accepted", hits[0])
+        self.assertIn("index.html", hits[0])
+        self.assertIn("src/auth/login.js", hits[0])
+        self.assertNotIn("README.md", hits[0])
+
+    def test_check_diff_no_scope_no_match_no_error(self):
+        # decisions without scope are skipped; unmatched paths produce no hits;
+        # advisory output never fails the run
+        self.write("decisions/d.md", GOOD_DECISION)
+        self.write("decisions/scoped.md", GOOD_DECISION.replace(
+            "status: accepted", "status: accepted\nscope: src/*"))
+        self.write("interviews/talk.md", INTERVIEW)
+        self.assertEqual(check_diff(self.bundle, ["docs/readme.md"]), [])
+        self.assertEqual(main([str(self.bundle), "--check-diff", "docs/readme.md"]), 0)
+        self.assertEqual(main([str(self.bundle), "--check-diff", "src/app.js"]), 0)
+
+    def test_check_diff_windows_paths_normalized(self):
+        self.write("decisions/d.md", GOOD_DECISION.replace(
+            "status: accepted", "status: accepted\nscope: src/auth/*"))
+        self.write("interviews/talk.md", INTERVIEW)
+        hits = check_diff(self.bundle, ["src\\auth\\login.js"])
+        self.assertEqual(len(hits), 1)
+
+    def test_check_bloat_advisory_only(self):
+        self.write("decisions/d.md", GOOD_DECISION)
+        self.write("interviews/talk.md", INTERVIEW)
+        self.assertEqual(check_bloat(self.bundle), [])
+        self.write("interviews/huge.md", INTERVIEW + "x" * 9000)
+        hits = check_bloat(self.bundle)
+        self.assertEqual(len(hits), 1)
+        self.assertIn("interviews/huge.md", hits[0])
+        self.assertIn("tokens per agent read", hits[0])
+        self.assertEqual(main([str(self.bundle)]), 0)  # advisory: never fails
 
     def test_exit_codes(self):
         self.write("decisions/d.md", GOOD_DECISION)

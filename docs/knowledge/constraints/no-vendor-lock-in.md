@@ -15,3 +15,10 @@ acceptable only as thin conveniences over a portable core.
 Stated by Ivan in the
 [2026-07-08 distribution interview](../interviews/2026-07-08-distribution-strategy.md):
 "We don't want vendor lock-in to Claude Code."
+
+**Extended 2026-07-09** (Ivan, in the
+[trending-goal session](../interviews/2026-07-09-trending-goal.md)): the
+constraint covers hosting platforms too — "there should be 0% vendor lock
+in on GitHub". Publishing paths must stay host-neutral: the rendered wiki
+is plain static HTML deployable to any static host; no deliverable may
+depend on a GitHub-specific feature.
